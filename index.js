@@ -21,6 +21,7 @@ function displayAllMeals(meals) {
    selectionH1.textContent = cuisineSelect.value || categorySelect.value
    meals.meals.forEach(meal => {
       renderMealCard(meal)
+      //writeToDbJson
    })
    cuisineSelect.value = ""
    categorySelect.value = ""
@@ -48,10 +49,12 @@ function renderMealCard(meal) {
 function getRecipe(e, id) {
    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
       .then(r => r.json())
-      .then(recipe => renderRecipeDetails(recipe.meals[0]))
+      .then(recipe => writeToDbJson(recipe.meals[0]))
+      //renderRecipeDetails(recipe.meals[0]) - put this back after testing
 }
 
 function renderRecipeDetails(recipe) {
+   console.log(recipe)
    let nameP = document.createElement("p")
    let cuisineP = document.createElement("p")
    let categoryP = document.createElement("p")

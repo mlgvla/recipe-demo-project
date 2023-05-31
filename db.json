@@ -1,0 +1,175 @@
+{"recipes": [],
+
+  "cuisines": [
+    {
+      "name": "American",
+      "id": 1
+    },
+    {
+      "name": "British",
+      "id": 2
+    },
+    {
+      "name": "Canadian",
+      "id": 3
+    },
+    {
+      "name": "Chinese",
+      "id": 4
+    },
+    {
+      "name": "Croatian",
+      "id": 5
+    },
+    {
+      "name": "Dutch",
+      "id": 6
+    },
+    {
+      "name": "Egyptian",
+      "id": 7
+    },
+    {
+      "name": "French",
+      "id": 8
+    },
+    {
+      "name": "Filipino",
+      "id": 9
+    },
+    {
+      "name": "Greek",
+      "id": 10
+    },
+    {
+      "name": "Indian",
+      "id": 11
+    },
+    {
+      "name": "Irish",
+      "id": 12
+    },
+    {
+      "name": "Italian",
+      "id": 13
+    },
+    {
+      "name": "Jamaican",
+      "id": 14
+    },
+    {
+      "name": "Japanese",
+      "id": 15
+    },
+    {
+      "name": "Kenyan",
+      "id": 16
+    },
+    {
+      "name": "Malaysian",
+      "id": 17
+    },
+    {
+      "name": "Mexican",
+      "id": 18
+    },
+    {
+      "name": "Portuguese",
+      "id": 19
+    },
+    {
+      "name": "Moroccan",
+      "id": 20
+    },
+    {
+      "name": "Polish",
+      "id": 21
+    },
+    {
+      "name": "Spanish",
+      "id": 22
+    },
+    {
+      "name": "Thai",
+      "id": 23
+    },
+    {
+      "name": "Russian",
+      "id": 24
+    },
+    {
+      "name": "Turkish",
+      "id": 25
+    },
+    {
+      "name": "Unknown",
+      "id": 26
+    },
+    {
+      "name": "Tunisian",
+      "id": 27
+    },
+    {
+      "name": "Vietnamese",
+      "id": 28
+    }
+  ],
+  "categories": [
+    {
+      "name": "Beef",
+      "id": 1
+    },
+    {
+      "name": "Breakfast",
+      "id": 2
+    },
+    {
+      "name": "Chicken",
+      "id": 3
+    },
+    {
+      "name": "Dessert",
+      "id": 4
+    },
+    {
+      "name": "Goat",
+      "id": 5
+    },
+    {
+      "name": "Lamb",
+      "id": 6
+    },
+    {
+      "name": "Miscellaneous",
+      "id": 7
+    },
+    {
+      "name": "Pasta",
+      "id": 8
+    },
+    {
+      "name": "Pork",
+      "id": 9
+    },
+    {
+      "name": "Seafood",
+      "id": 10
+    },
+    {
+      "name": "Side",
+      "id": 11
+    },
+    {
+      "name": "Starter",
+      "id": 12
+    },
+    {
+      "name": "Vegan",
+      "id": 13
+    },
+    {
+      "name": "Vegetarian",
+      "id": 14
+    }
+  ]
+}

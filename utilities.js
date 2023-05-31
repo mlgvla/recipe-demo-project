@@ -6,28 +6,53 @@ const recipeSection = document.querySelector(".recipe-section")
 const selectionH1 = document.querySelector(".selection-heading")
 
 // Populate Dropdowns
-getAreas()
-getCategories()
+getCuisines()
+// getCategories()
 
-function getAreas(params) {
-   fetch("https://www.themealdb.com/api/json/v1/1/list.php?a=list")
+function getCuisines() {
+   fetch("http://localhost:3000/cuisines")
       .then(r => r.json())
-      .then(areas => renderAreaOptions(areas))
+      .then(cuisines => renderCuisineOptions(cuisines))
 }
+// function getAreas() {
+//    fetch("https://www.themealdb.com/api/json/v1/1/list.php?a=list")
+//       .then(r => r.json())
+//       .then(cuisines => writeCuisinesToDbJson(cuisines))
+// }
 
-function renderAreaOptions(areas) {
-   areas.meals.forEach(meal => {
+function renderCuisineOptions(cuisines) {
+   cuisines.forEach(cuisine => {
+      console.log(cuisine.name)
       const option = document.createElement("option")
-      option.value = meal.strArea
-      option.textContent = meal.strArea
+      option.value = cuisine.name
+      option.textContent = cuisine.name
       cuisineSelect.append(option)
    })
 }
 
+// function writeCuisinesToDbJson(cuisines) {
+//    console.log("In write to dbjson ")
+//    console.log(cuisines.meals[0].strArea)
+//    cuisines.meals.forEach(cuisine => {
+//       const obj = {
+//          name: cuisine.strArea
+//       }
+//       console.log(obj)
+//       fetch("http://localhost:3000/cuisines", {
+//          method: "POST",
+//          headers: {
+//             "Content-Type": "application/json",
+//          },
+//          body: JSON.stringify(obj),
+//       })
+//    })
+// }
+
 function getCategories() {
+   console.log("in getCategories")
    fetch("https://www.themealdb.com/api/json/v1/1/list.php?c=list")
       .then(r => r.json())
-      .then(categories => renderCategoryOptions(categories))
+      .then(categories => writeCategoriesToDbJson(categories))
 }
 
 function renderCategoryOptions(categories) {
@@ -38,6 +63,8 @@ function renderCategoryOptions(categories) {
       categorySelect.append(option)
    })
 }
+
+function writeCategoryToDbJson(categories) {}
 
 // Parse Ingredients and Measures from MealDB meal object
 function parseIngredients(recipe) {
@@ -54,4 +81,22 @@ function parseIngredients(recipe) {
       ingredientArray.push(ingredientString)
    }
    return ingredientArray
+}
+
+function writeToDbJson(recipe) {
+   //create a recipe object from the recipe object as received from MealsDB
+   //POST to db.json
+   const recipeObj = {
+      name: recipe.strMeal,
+      cuisine: recipe.strArea,
+      category: recipe.strCategory,
+      image: recipe.strMealThumb,
+      ingredients: parseIngredients(recipe),
+      instructions: recipe.strInstructions,
+      video: recipe.strYoutube,
+   }
+   console.log(recipeObj)
+   // fetch("http://localhost:3000, configObj")
+   // .then(r => r.json())
+   // .then(data => console.log(data))
 }
