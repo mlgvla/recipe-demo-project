@@ -3,6 +3,7 @@ categorySelect.addEventListener("change", getMealsByCategory)
 
 function getMealsByCuisine(e) {
    const cuisine = e.target.value
+   console.log(cuisine)
    fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${cuisine}`)
       .then(r => r.json())
       .then(meals => displayAllMeals(meals))

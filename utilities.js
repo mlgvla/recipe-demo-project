@@ -7,18 +7,19 @@ const selectionH1 = document.querySelector(".selection-heading")
 
 // Populate Dropdowns
 getCuisines()
-// getCategories()
+getCategories()
 
 function getCuisines() {
    fetch("http://localhost:3000/cuisines")
       .then(r => r.json())
       .then(cuisines => renderCuisineOptions(cuisines))
 }
-// function getAreas() {
-//    fetch("https://www.themealdb.com/api/json/v1/1/list.php?a=list")
-//       .then(r => r.json())
-//       .then(cuisines => writeCuisinesToDbJson(cuisines))
-// }
+
+function getCategories() {
+   fetch("http://localhost:3000/categories")
+      .then(r => r.json())
+      .then(categories => renderCategoryOptions(categories))
+}
 
 function renderCuisineOptions(cuisines) {
    cuisines.forEach(cuisine => {
@@ -30,41 +31,14 @@ function renderCuisineOptions(cuisines) {
    })
 }
 
-// function writeCuisinesToDbJson(cuisines) {
-//    console.log("In write to dbjson ")
-//    console.log(cuisines.meals[0].strArea)
-//    cuisines.meals.forEach(cuisine => {
-//       const obj = {
-//          name: cuisine.strArea
-//       }
-//       console.log(obj)
-//       fetch("http://localhost:3000/cuisines", {
-//          method: "POST",
-//          headers: {
-//             "Content-Type": "application/json",
-//          },
-//          body: JSON.stringify(obj),
-//       })
-//    })
-// }
-
-function getCategories() {
-   console.log("in getCategories")
-   fetch("https://www.themealdb.com/api/json/v1/1/list.php?c=list")
-      .then(r => r.json())
-      .then(categories => writeCategoriesToDbJson(categories))
-}
-
 function renderCategoryOptions(categories) {
-   categories.meals.forEach(meal => {
+   categories.forEach(category => {
       const option = document.createElement("option")
-      option.value = meal.strCategory
-      option.textContent = meal.strCategory
+      option.value = category.name
+      option.textContent = category.name
       categorySelect.append(option)
    })
 }
-
-function writeCategoryToDbJson(categories) {}
 
 // Parse Ingredients and Measures from MealDB meal object
 function parseIngredients(recipe) {
@@ -100,3 +74,38 @@ function writeToDbJson(recipe) {
    // .then(r => r.json())
    // .then(data => console.log(data))
 }
+
+
+
+
+// FUNCTIONS FOR GETTING STUFFING FROM MEALS.DB
+// function writeCuisinesToDbJson(cuisines) {
+//    console.log("In write to dbjson ")
+//    console.log(cuisines.meals[0].strArea)
+//    cuisines.meals.forEach(cuisine => {
+//       const obj = {
+//          name: cuisine.strArea
+//       }
+//       console.log(obj)
+//       fetch("http://localhost:3000/cuisines", {
+//          method: "POST",
+//          headers: {
+//             "Content-Type": "application/json",
+//          },
+//          body: JSON.stringify(obj),
+//       })
+//    })
+// }
+
+// function getCategories() {
+//    console.log("in getCategories")
+//    fetch("https://www.themealdb.com/api/json/v1/1/list.php?c=list")
+//       .then(r => r.json())
+//       .then(categories => writeCategoriesToDbJson(categories))
+// }
+
+// function getAreas() {
+//    fetch("https://www.themealdb.com/api/json/v1/1/list.php?a=list")
+//       .then(r => r.json())
+//       .then(cuisines => writeCuisinesToDbJson(cuisines))
+// }
