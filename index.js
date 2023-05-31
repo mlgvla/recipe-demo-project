@@ -14,6 +14,7 @@ function getMealsByCategory(e) {
       .then(r => r.json())
       .then(meals => displayAllMeals(meals))
 }
+
 function displayAllMeals(meals) {
    recipeContainer.replaceChildren()
 
@@ -26,12 +27,22 @@ function displayAllMeals(meals) {
 }
 
 function renderMealCard(meal) {
+   let cardDiv = document.createElement("div")
+   cardDiv.classList.add("card")
+
+   let titleH3 = document.createElement("h3")
+   titleH3.classList.add("card-title")
+   titleH3.textContent = meal.strMeal
+
    const id = meal.idMeal
-   const mealTxt = meal.strMeal
-   const mealImg = document.createElement("img")
-   mealImg.addEventListener("click", e => getRecipe(e, id))
+
+   let mealImg = document.createElement("img")
+   mealImg.classList.add("card-image")
    mealImg.src = meal.strMealThumb
-   recipeContainer.append(mealImg, mealTxt)
+   mealImg.addEventListener("click", e => getRecipe(e, id))
+
+   cardDiv.append(mealImg, titleH3)
+   recipeContainer.append(cardDiv)
 }
 
 function getRecipe(e, id) {
@@ -41,22 +52,19 @@ function getRecipe(e, id) {
 }
 
 function renderRecipeDetails(recipe) {
-   console.log(recipe)
-
    let nameP = document.createElement("p")
    let cuisineP = document.createElement("p")
    let categoryP = document.createElement("p")
    let mealImg = document.createElement("img")
    let instructionsP = document.createElement("p")
    let ingredients = parseIngredients(recipe)
-   console.log(ingredients)
+
    let ingredientPs = ingredients.map(ingredient => {
       let ingredientP = document.createElement("p")
       ingredientP.textContent = ingredient
-      console.log(ingredientP)
       return ingredientP
    })
-   console.log(ingredients)
+
    nameP.textContent = recipe.strMeal
    cuisineP.textContent = recipe.strArea
    categoryP.textContent = recipe.strCategory
@@ -65,7 +73,6 @@ function renderRecipeDetails(recipe) {
 
    selectionH1.textContent = ""
    recipeContainer.replaceChildren()
-
    recipeContainer.append(
       mealImg,
       nameP,
