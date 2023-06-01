@@ -5,9 +5,20 @@ const recipeContainer = document.querySelector(".recipe-container")
 const recipeSection = document.querySelector(".recipe-section")
 const selectionH1 = document.querySelector(".selection-heading")
 
-// Populate Dropdowns
+// Populate Dropdowns and RecipeObjs array
 getCuisines()
 getCategories()
+getRecipes()
+
+function getRecipes() {
+   fetch("http://localhost:3000/recipes")
+      .then(r => r.json())
+      .then(recipes => {
+         recipes.forEach(recipe => {
+            recipeObjs.push(recipe)
+         })
+      })
+}
 
 function getCuisines() {
    fetch("http://localhost:3000/cuisines")
@@ -40,45 +51,45 @@ function renderCategoryOptions(categories) {
 }
 
 // Parse Ingredients and Measures from MealDB meal object
-function parseIngredients(recipe) {
-   const ingredientArray = []
+// function parseIngredients(recipe) {
+//    const ingredientArray = []
 
-   for (let i = 1; i < 21; i++) {
-      let measure = recipe["strMeasure" + i.toString()]
-      let ingredient = recipe["strIngredient" + i.toString()]
-      if (ingredient === "" || ingredient === null) {
-         ingredient = "" // replaces null value with a string for trim() method
-         continue //don't include empty ingredient strings of null values
-      }
-      let ingredientString = measure.trim() + " " + ingredient.trim() // get rid of extra trailing spaces
-      ingredientArray.push(ingredientString)
-   }
-   return ingredientArray
-}
+//    for (let i = 1; i < 21; i++) {
+//       let measure = recipe["strMeasure" + i.toString()]
+//       let ingredient = recipe["strIngredient" + i.toString()]
+//       if (ingredient === "" || ingredient === null) {
+//          ingredient = "" // replaces null value with a string for trim() method
+//          continue //don't include empty ingredient strings of null values
+//       }
+//       let ingredientString = measure.trim() + " " + ingredient.trim() // get rid of extra trailing spaces
+//       ingredientArray.push(ingredientString)
+//    }
+//    return ingredientArray
+// }
 
-function writeToDbJson(recipe) {
-   //create a recipe object from the recipe object as received from MealsDB
-   //POST to db.json
+// function writeToDbJson(recipe) {
+//    //create a recipe object from the recipe object as received from MealsDB
+//    //POST to db.json
 
-   const recipeObj = {
-      name: recipe.strMeal,
-      cuisine: recipe.strArea,
-      category: recipe.strCategory,
-      image: recipe.strMealThumb,
-      ingredients: parseIngredients(recipe),
-      instructions: recipe.strInstructions,
-      video: recipe.strYoutube,
-   }
-   fetch("http://localhost:3000/recipes", {
-      method: "POST",
-      headers: {
-         "Content-Type": "application/json",
-      },
-      body: JSON.stringify(recipeObj),
-   })
-      .then(r => r.json())
-      .then(recipe => console.log(recipe))
-}
+//    const recipeObj = {
+//       name: recipe.strMeal,
+//       cuisine: recipe.strArea,
+//       category: recipe.strCategory,
+//       image: recipe.strMealThumb,
+//       ingredients: parseIngredients(recipe),
+//       instructions: recipe.strInstructions,
+//       video: recipe.strYoutube,
+//    }
+//    fetch("http://localhost:3000/recipes", {
+//       method: "POST",
+//       headers: {
+//          "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(recipeObj),
+//    })
+//       .then(r => r.json())
+//       .then(recipe => console.log(recipe))
+// }
 
 // FUNCTIONS FOR GETTING STUFFING FROM MEALS.DB
 // function writeCuisinesToDbJson(cuisines) {
