@@ -17,12 +17,13 @@ function getMealsByCategory(e) {
 }
 
 function displayAllMeals(meals) {
+
    recipeContainer.replaceChildren()
 
    selectionH1.textContent = cuisineSelect.value || categorySelect.value
    meals.meals.forEach(meal => {
-      renderMealCard(meal)
-      //writeToDbJson
+      // renderMealCard(meal)
+      getRecipe(null, meal.idMeal)
    })
    cuisineSelect.value = ""
    categorySelect.value = ""
@@ -51,7 +52,7 @@ function getRecipe(e, id) {
    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
       .then(r => r.json())
       .then(recipe => writeToDbJson(recipe.meals[0]))
-      //renderRecipeDetails(recipe.meals[0]) - put this back after testing
+   //renderRecipeDetails(recipe.meals[0]) - put this back after testing
 }
 
 function renderRecipeDetails(recipe) {

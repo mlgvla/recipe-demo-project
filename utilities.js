@@ -23,7 +23,6 @@ function getCategories() {
 
 function renderCuisineOptions(cuisines) {
    cuisines.forEach(cuisine => {
-      console.log(cuisine.name)
       const option = document.createElement("option")
       option.value = cuisine.name
       option.textContent = cuisine.name
@@ -60,6 +59,7 @@ function parseIngredients(recipe) {
 function writeToDbJson(recipe) {
    //create a recipe object from the recipe object as received from MealsDB
    //POST to db.json
+
    const recipeObj = {
       name: recipe.strMeal,
       cuisine: recipe.strArea,
@@ -69,14 +69,16 @@ function writeToDbJson(recipe) {
       instructions: recipe.strInstructions,
       video: recipe.strYoutube,
    }
-   console.log(recipeObj)
-   // fetch("http://localhost:3000, configObj")
-   // .then(r => r.json())
-   // .then(data => console.log(data))
+   fetch("http://localhost:3000/recipes", {
+      method: "POST",
+      headers: {
+         "Content-Type": "application/json",
+      },
+      body: JSON.stringify(recipeObj),
+   })
+      .then(r => r.json())
+      .then(recipe => console.log(recipe))
 }
-
-
-
 
 // FUNCTIONS FOR GETTING STUFFING FROM MEALS.DB
 // function writeCuisinesToDbJson(cuisines) {
